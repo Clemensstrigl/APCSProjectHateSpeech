@@ -10,6 +10,7 @@ public class Main {
     static HashMap<String, List<String>> dataByName;
     static Document d;
     static String ExampleFileName = "";
+    static int counter = 0;
 
     public static void main(String[] args) {
         d = new Document(importTexT(ExampleFileName));
@@ -18,6 +19,7 @@ public class Main {
         for (String sentence: d.getSentences()) {
             if(getLocSymbole(sentence) != -1){
                 System.out.println(sentence);
+                counter++;
                 continue;
             }
             int Slang =  getLocSlang(sentence);
@@ -27,11 +29,13 @@ public class Main {
                 continue;
             }
             if(Race < ActionWords && Slang >  ActionWords){
+                counter++;
                 System.out.println(sentence);
             }
 
         }
-            
+
+        System.out.println("Number of Discriminative sentences: " + counter + "/" + d.getSentenceCount());
 
 
 }
