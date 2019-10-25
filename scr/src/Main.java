@@ -15,13 +15,13 @@ public class Main {
         d = new Document(importTexT(ExampleFileName));
         dataByName = importDataSet("C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\DiscriminativeDataBase");
             //Check each sentence if it contains the slangs or symbols
-        for (String sentenec: d.getSentences()) {
-            if(getLocSymbole(sentenec) != -1){
-                System.out.println(sentenec);
+        for (String sentence: d.getSentences()) {
+            if(getLocSymbole(sentence) != -1){
+                System.out.println(sentence);
                 continue;
             }
-            int Slang =  getLocSlang(sentenec);
-            int Race = getLocRace(sentenec);
+            int Slang =  getLocSlang(sentence);
+            int Race = getLocRace(sentence);
             int ActionWords =  getLocActionsWord();
             if(Race == -1 || Slang ==-1 ){
                 continue;
@@ -102,6 +102,24 @@ public class Main {
         for (int i = 0; i <dataByName.get("Symbols").size(); i++) {
             if(sentence.contains(dataByName.get("Symbols").get(i))){
                 return sentence.indexOf(dataByName.get("Symbols").get(i));
+            }
+        }
+        return -1;
+    }
+
+    public static int getLocRaces(String sentence){
+        for (int i = 0; i <dataByName.get("Races").size(); i++) {
+            if(sentence.contains(dataByName.get("Races").get(i))){
+                return sentence.indexOf(dataByName.get("Races").get(i));
+            }
+        }
+        return -1;
+    }
+
+    public static int getLocActionWords(String sentence){
+        for (int i = 0; i <dataByName.get("ActionWords").size(); i++) {
+            if(sentence.contains(dataByName.get("ActionWords").get(i))){
+                return sentence.indexOf(dataByName.get("ActionWords").get(i));
             }
         }
         return -1;
