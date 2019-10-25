@@ -7,18 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static ArrayList<String> Races = new ArrayList<String>();
-    static ArrayList<String> ActionWords = new ArrayList<String>();
-    static ArrayList<String> Slangs = new ArrayList<String>();
-    static ArrayList<String> Sentences = new ArrayList<String>();
-    static ArrayList<String> Symbols = new ArrayList<String>();
-    private static Object ArrayList;
-
+    static HashMap<String, List<String>> dataByName;
 
     public static void main(String[] args) {
-        var dataByName = importDataSet("C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\DiscriminativeDataBase");
-        System.out.println(dataByName.size());
-        System.out.println(dataByName.get("Races"));
+        dataByName = importDataSet("C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\DiscriminativeDataBase");
+
+//        for (String key : dataByName.keySet() ) {
+////
+////        }
+
+
 
 }
 
@@ -48,5 +46,22 @@ public class Main {
         }
 
         return dataByName;
+    }
+
+    public static int getLocSlang(String sentence){
+        for (int i = 0; i <dataByName.get("Slang").size(); i++) {
+            if(sentence.contains(dataByName.get("Slang").get(i))){
+               return sentence.indexOf(dataByName.get("Slang").get(i));
+            }
+        }
+        return -1;
+    }
+    public static int getLocSymbole(String sentence){
+        for (int i = 0; i <dataByName.get("Symbols").size(); i++) {
+            if(sentence.contains(dataByName.get("Symbols").get(i))){
+                return sentence.indexOf(dataByName.get("Symbols").get(i));
+            }
+        }
+        return -1;
     }
 }
