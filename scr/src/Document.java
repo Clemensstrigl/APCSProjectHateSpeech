@@ -9,6 +9,9 @@ public class Document {
     private ArrayList<Character> characters = new ArrayList<Character>();
     public boolean DirtyFlag = false;
 
+    public ArrayList<String> getSentences() {
+        return sentences;
+    }
 
     public Document(String text) {
         this.text = text;

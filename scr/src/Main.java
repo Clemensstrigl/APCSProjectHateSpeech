@@ -8,17 +8,59 @@ import java.util.Scanner;
 
 public class Main {
     static HashMap<String, List<String>> dataByName;
+    static Document d;
+    static String ExampleFileName = "";
 
     public static void main(String[] args) {
+        d = new Document(importTexT(ExampleFileName));
         dataByName = importDataSet("C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\DiscriminativeDataBase");
+            //Check each sentence if it contains the slangs or symbols
+        for (String sentenec: d.getSentences()) {
+            if(getLocSymbole(sentenec) != -1){
+                System.out.println(sentenec);
+                continue;
+            }
+            int Slang =  getLocSlang(sentenec);
+            int Race = getLocRace(sentenec);
+            int ActionWords =  getLocActionsWord();
+            if(Race == -1 || Slang ==-1 ){
+                continue;
+            }
+            if(getDiff(Slang,Race))
 
-//        for (String key : dataByName.keySet() ) {
-////
-////        }
 
+
+
+
+        }
+            
 
 
 }
+
+    public static int getDiff(int a, int b){
+        return Math.abs(a-b);
+    }
+
+    public static String importTexT(String filename) {
+        Scanner scanner;
+        StringBuilder output = new StringBuilder();
+
+        try {
+            scanner = new Scanner(new FileInputStream(filename), "UTF-8");
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                output.append(line.trim()+"\n");
+            }
+
+            scanner.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found " + filename);
+        }
+
+        return output.toString();
+    }
 
 
     public static HashMap importDataSet(String filename) {
