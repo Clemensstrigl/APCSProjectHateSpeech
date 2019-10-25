@@ -22,15 +22,13 @@ public class Main {
             }
             int Slang =  getLocSlang(sentence);
             int Race = getLocRace(sentence);
-            int ActionWords =  getLocActionsWord();
+            int ActionWords =  getLocActionWord(sentence);
             if(Race == -1 || Slang ==-1 ){
                 continue;
             }
-            if(getDiff(Slang,Race))
-
-
-
-
+            if(Race < ActionWords && Slang >  ActionWords){
+                System.out.println(sentence);
+            }
 
         }
             
@@ -107,7 +105,7 @@ public class Main {
         return -1;
     }
 
-    public static int getLocRaces(String sentence){
+    public static int getLocRace(String sentence){
         for (int i = 0; i <dataByName.get("Races").size(); i++) {
             if(sentence.contains(dataByName.get("Races").get(i))){
                 return sentence.indexOf(dataByName.get("Races").get(i));
@@ -116,7 +114,7 @@ public class Main {
         return -1;
     }
 
-    public static int getLocActionWords(String sentence){
+    public static int getLocActionWord(String sentence){
         for (int i = 0; i <dataByName.get("ActionWords").size(); i++) {
             if(sentence.contains(dataByName.get("ActionWords").get(i))){
                 return sentence.indexOf(dataByName.get("ActionWords").get(i));
