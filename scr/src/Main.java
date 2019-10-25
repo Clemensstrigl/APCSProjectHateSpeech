@@ -64,7 +64,7 @@ public class Main {
 
 
     public static HashMap importDataSet(String filename) {
-        var dataByName = new HashMap<String, List<String>>();
+        HashMap<String,List<String>> dataByName = new HashMap<String, List<String>>();
         Scanner scanner;
         StringBuilder output = new StringBuilder();
 
@@ -73,7 +73,7 @@ public class Main {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] splitLines = line.split(",");
-                var dataList = new ArrayList<String>();
+                ArrayList<String> dataList = new ArrayList<String>();
                 for (int s = 1; s < splitLines.length; s++) {
                     dataList.add(splitLines[s]);
                 }
