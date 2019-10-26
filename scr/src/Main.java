@@ -13,10 +13,11 @@ public class Main {
     static int counter = 0;
 
     public static void main(String[] args) {
-        d = new Document(importTexT(ExampleFileName));
+       d = new Document(importTexT(ExampleFileName));
         dataByName = importDataSet("C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\DiscriminativeDataBase");
             //Check each sentence if it contains the slangs or symbols
         for (String sentence: d.getSentences()) {
+            sentence = sentence.toLowerCase();
             if(getLocSymbole(sentence) != -1){
                 System.out.println(sentence);
                 counter++;
@@ -93,9 +94,9 @@ public class Main {
     }
 
     public static int getLocSlang(String sentence){
-        for (int i = 0; i <dataByName.get("Slang").size(); i++) {
-            if(sentence.contains(dataByName.get("Slang").get(i))){
-               return sentence.indexOf(dataByName.get("Slang").get(i));
+        for (int i = 0; i <dataByName.get("Slangs").size(); i++) {
+            if(sentence.contains(dataByName.get("Slangs").get(i).toLowerCase())){
+               return sentence.indexOf(dataByName.get("Slangs").get(i).toLowerCase());
             }
         }
         return -1;
@@ -111,8 +112,8 @@ public class Main {
 
     public static int getLocRace(String sentence){
         for (int i = 0; i <dataByName.get("Races").size(); i++) {
-            if(sentence.contains(dataByName.get("Races").get(i))){
-                return sentence.indexOf(dataByName.get("Races").get(i));
+            if(sentence.contains(dataByName.get("Races").get(i).toLowerCase())){
+                return sentence.indexOf(dataByName.get("Races").get(i).toLowerCase());
             }
         }
         return -1;
@@ -120,8 +121,8 @@ public class Main {
 
     public static int getLocActionWord(String sentence){
         for (int i = 0; i <dataByName.get("ActionWords").size(); i++) {
-            if(sentence.contains(dataByName.get("ActionWords").get(i))){
-                return sentence.indexOf(dataByName.get("ActionWords").get(i));
+            if(sentence.contains(dataByName.get("ActionWords").get(i).toLowerCase())){
+                return sentence.indexOf(dataByName.get("ActionWords").get(i).toLowerCase());
             }
         }
         return -1;
