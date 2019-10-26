@@ -11,6 +11,8 @@ public class Main {
     static Document d;
     static String ExampleFileName = "";
     static int counter = 0;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
 
     public static void main(String[] args) {
        d = new Document(importTexT(ExampleFileName));
@@ -19,7 +21,7 @@ public class Main {
         for (String sentence: d.getSentences()) {
             sentence = sentence.toLowerCase();
             if(getLocSymbole(sentence) != -1){
-                System.out.println(sentence);
+                System.out.println(ANSI_RED+ sentence + ANSI_RESET);
                 counter++;
                 continue;
             }
@@ -27,11 +29,12 @@ public class Main {
             int Race = getLocRace(sentence);
             int ActionWords =  getLocActionWord(sentence);
             if(Race == -1 || Slang ==-1 ){
+                System.out.println(sentence);
                 continue;
             }
             if(Race < ActionWords && Slang >  ActionWords){
                 counter++;
-                System.out.println(sentence);
+                System.out.println(ANSI_RED + sentence + ANSI_RESET);
             }
 
         }
