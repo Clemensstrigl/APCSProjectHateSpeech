@@ -20,7 +20,7 @@ public class Main {
             //Check each sentence if it contains the slangs or symbols
         for (String sentence: d.getSentences()) {
             sentence = sentence.toLowerCase();
-            if(getLocSymbole(sentence) != -1){
+            if(getLocSymbole(sentence)){
                 System.out.println(ANSI_RED+ sentence + ANSI_RESET);
                 counter++;
                 continue;
@@ -98,25 +98,32 @@ public class Main {
 
     public static int getLocSlang(String sentence){
         for (int i = 0; i <dataByName.get("Slangs").size(); i++) {
-            if(sentence.contains(dataByName.get("Slangs").get(i).toLowerCase())){
-               return sentence.indexOf(dataByName.get("Slangs").get(i).toLowerCase());
+            String slang = dataByName.get("Slangs").get(i).toLowerCase();
+            if(sentence.contains(slang)){
+               return sentence.indexOf(slang);
             }
+            else if(sentence.contains(slang + "s")){
+                return sentence.indexOf(slang + "s");
+            }
+
         }
         return -1;
     }
-    public static int getLocSymbole(String sentence){
+    public static boolean getLocSymbole(String sentence){
         for (int i = 0; i <dataByName.get("Symbols").size(); i++) {
-            if(sentence.contains(dataByName.get("Symbols").get(i))){
-                return sentence.indexOf(dataByName.get("Symbols").get(i));
+            String symbole = dataByName.get("Symbols").get(i);
+            if(sentence.contains(symbole)){
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
     public static int getLocRace(String sentence){
         for (int i = 0; i <dataByName.get("Races").size(); i++) {
-            if(sentence.contains(dataByName.get("Races").get(i).toLowerCase())){
-                return sentence.indexOf(dataByName.get("Races").get(i).toLowerCase());
+            String race = dataByName.get("Races").get(i).toLowerCase();
+            if(sentence.contains(race)){
+                return sentence.indexOf(race);
             }
         }
         return -1;
@@ -124,8 +131,9 @@ public class Main {
 
     public static int getLocActionWord(String sentence){
         for (int i = 0; i <dataByName.get("ActionWords").size(); i++) {
-            if(sentence.contains(dataByName.get("ActionWords").get(i).toLowerCase())){
-                return sentence.indexOf(dataByName.get("ActionWords").get(i).toLowerCase());
+            String ActionWord = dataByName.get("ActionWords").get(i).toLowerCase();
+            if(sentence.contains(ActionWord)){
+                return sentence.indexOf(ActionWord);
             }
         }
         return -1;
