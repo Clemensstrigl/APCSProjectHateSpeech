@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
     static HashMap<String, List<String>> dataByName;
     static Document d;
-    static String ExampleFileName = "";
+    static String ExampleFileName = "C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\Data set";
     static int counter = 0;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
