@@ -9,14 +9,14 @@ import java.util.Scanner;
 public class Main {
     static HashMap<String, List<String>> dataByName;
     static Document d;
-    static String ExampleFileName = "C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\Data set";
+    static String ExampleFileName = "/Users/chinchillacrazy/apcs/APCSProjectHateSpeech/scr/All Data/Data set";//"C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\Data set";
     static int counter = 0;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
 
     public static void main(String[] args) {
        d = new Document(importTexT(ExampleFileName));
-        dataByName = importDataSet("C:\\Users\\cleme\\IdeaProjects\\APCSProjcetHateSpeech\\scr\\All Data\\DiscriminativeDataBase");
+        dataByName = importDataSet("/Users/chinchillacrazy/apcs/APCSProjectHateSpeech/scr/All Data/DiscriminativeDataBase");
             //Check each sentence if it contains the slangs or symbols
         for (String sentence: d.getSentences()) {
             sentence = sentence.toLowerCase();
@@ -28,14 +28,33 @@ public class Main {
             int Slang =  getLocSlang(sentence);
             int Race = getLocRace(sentence);
             int ActionWords =  getLocActionWord(sentence);
-            if(Race == -1 || Slang ==-1 ){
+            int Place =  getLocPlaces(sentence);
+
+            if(Race == -1 && Slang ==-1 && Place == -1){
                 System.out.println(sentence);
                 continue;
             }
-            if(Race < ActionWords && Slang >  ActionWords){
+
+            //Added New if statements
+
+            if(Race < ActionWords){
+                if (Slang >  ActionWords || Place >  ActionWords) {
+                    counter++;
+                    System.out.println(ANSI_RED + sentence + ANSI_RESET);
+                }
+            }
+
+            else if(ActionWords < Race || ActionWords < Place) {
                 counter++;
                 System.out.println(ANSI_RED + sentence + ANSI_RESET);
             }
+
+            else if (Race >= 0 || Slang >= 0 || Place >= 0) {
+                counter++;
+                System.out.println(ANSI_RED + sentence + ANSI_RESET);
+            }
+
+
 
         }
 
@@ -43,6 +62,7 @@ public class Main {
 
 
 }
+
 
     public static int getDiff(int a, int b){
         return Math.abs(a-b);
@@ -138,4 +158,17 @@ public class Main {
         }
         return -1;
     }
+
+    //Added Countries
+    public static int getLocPlaces(String sentence){
+        for (int i = 0; i <dataByName.get("Places").size(); i++) {
+            String Place = dataByName.get("Places").get(i).toLowerCase();
+            if(sentence.contains(Place)){
+                return sentence.indexOf(Place);
+            }
+        }
+        return -1;
+    }
+
+
 }
